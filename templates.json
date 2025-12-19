@@ -1,0 +1,171 @@
+{
+  "categories": [
+    {
+      "id": "ecommerce",
+      "name": "E-commerce",
+      "icon": "🛍️",
+      "templates": [
+        {
+          "id": "ec-1",
+          "name": "Lancement produit",
+          "content": "🎉 Nouveau ! Découvrez [produit]. Disponible dès maintenant.\n\n👉 [lien]\n\n#NouveauProduit #Lancement",
+          "platforms": ["instagram", "facebook", "linkedin"]
+        },
+        {
+          "id": "ec-2",
+          "name": "Promotion flash",
+          "content": "🔥 -30% aujourd'hui seulement sur [produit] !\n\nCode promo : [CODE]\n\n⏰ Offre valable jusqu'à minuit\n\n#Promo #BonPlan",
+          "platforms": ["instagram", "facebook"]
+        },
+        {
+          "id": "ec-3",
+          "name": "Témoignage client",
+          "content": "⭐ [Prénom] adore notre [produit] :\n\n\"[Citation du client]\"\n\nMerci pour votre confiance ! 💜\n\n#Avis #Client",
+          "platforms": ["instagram", "facebook", "linkedin"]
+        },
+        {
+          "id": "ec-4",
+          "name": "Réassort",
+          "content": "📦 De retour en stock !\n\n[Produit] est à nouveau disponible. Ne le laissez pas s'échapper cette fois !\n\n👉 Lien en bio",
+          "platforms": ["instagram"]
+        },
+        {
+          "id": "ec-5",
+          "name": "Behind the scenes",
+          "content": "👀 Coulisses : Comment nous créons [produit]\n\n[Description du processus]\n\n#BehindTheScenes #Coulisses",
+          "platforms": ["instagram", "facebook"]
+        }
+      ]
+    },
+    {
+      "id": "b2b",
+      "name": "Services B2B",
+      "icon": "💼",
+      "templates": [
+        {
+          "id": "b2b-1",
+          "name": "Case study",
+          "content": "📊 Comment nous avons aidé [Client] à [résultat chiffré]\n\n✅ Défi : [problème]\n✅ Solution : [approche]\n✅ Résultat : [impact]\n\nVous voulez les mêmes résultats ? Contactez-nous 👇",
+          "platforms": ["linkedin"]
+        },
+        {
+          "id": "b2b-2",
+          "name": "Astuce pro",
+          "content": "💡 Tip du jour pour [cible] :\n\n[Conseil actionnable en 3 points]\n\n1️⃣ ...\n2️⃣ ...\n3️⃣ ...\n\nEnregistrez ce post pour plus tard ! 📌",
+          "platforms": ["linkedin", "instagram"]
+        },
+        {
+          "id": "b2b-3",
+          "name": "Annonce webinar",
+          "content": "🎓 Webinar GRATUIT : [Sujet]\n\n📅 [Date] à [Heure]\n⏱️ Durée : [X] minutes\n\nCe que vous apprendrez :\n• [Point 1]\n• [Point 2]\n• [Point 3]\n\n🔗 Inscription : [lien]",
+          "platforms": ["linkedin", "facebook"]
+        },
+        {
+          "id": "b2b-4",
+          "name": "Statistique",
+          "content": "📈 Le saviez-vous ?\n\n[Statistique choc] dans [industrie]\n\nSource : [Source]\n\nQu'en pensez-vous ? 👇",
+          "platforms": ["linkedin"]
+        },
+        {
+          "id": "b2b-5",
+          "name": "Comparatif",
+          "content": "🆚 [Solution A] vs [Solution B]\n\nNotre analyse :\n\n| Critère | A | B |\n|---------|---|---|\n| [C1] | ✅ | ❌ |\n| [C2] | ❌ | ✅ |\n\nLe verdict ? [Conclusion]",
+          "platforms": ["linkedin"]
+        }
+      ]
+    },
+    {
+      "id": "restaurant",
+      "name": "Restaurant / Food",
+      "icon": "🍽️",
+      "templates": [
+        {
+          "id": "rest-1",
+          "name": "Plat du jour",
+          "content": "🍽️ Plat du jour :\n\n[Nom du plat]\n[Description appétissante]\n\n📍 [Adresse]\n📞 Réservation : [Téléphone]\n\n#PlatDuJour #Restaurant",
+          "platforms": ["instagram", "facebook"]
+        },
+        {
+          "id": "rest-2",
+          "name": "Nouvelle carte",
+          "content": "✨ Nouvelle carte [Saison] !\n\nDécouvrez notre plat signature : [Plat]\n\n[Description]\n\nRéservez votre table 👇",
+          "platforms": ["instagram", "facebook"]
+        },
+        {
+          "id": "rest-3",
+          "name": "Événement",
+          "content": "🎉 Soirée spéciale [Thème]\n\n📅 [Date]\n🕖 À partir de [Heure]\n\nAu programme :\n• [Point 1]\n• [Point 2]\n\n⚠️ Places limitées !\n\n#Événement #Soirée",
+          "platforms": ["instagram", "facebook"]
+        },
+        {
+          "id": "rest-4",
+          "name": "Coulisses cuisine",
+          "content": "👨‍🍳 Notre chef vous dévoile la recette de [Plat] !\n\nIngrédients secrets :\n• [Ingrédient 1]\n• [Ingrédient 2]\n\nVenez goûter le résultat ! 😋",
+          "platforms": ["instagram"]
+        }
+      ]
+    },
+    {
+      "id": "freelance",
+      "name": "Freelance / Coach",
+      "icon": "🎯",
+      "templates": [
+        {
+          "id": "free-1",
+          "name": "Conseil gratuit",
+          "content": "💡 [Titre du conseil]\n\n3 points clés :\n\n1️⃣ [Point 1]\n2️⃣ [Point 2]\n3️⃣ [Point 3]\n\nEnregistrez ce post ! 📌\n\n#Conseil #Tips",
+          "platforms": ["instagram", "linkedin"]
+        },
+        {
+          "id": "free-2",
+          "name": "Transformation client",
+          "content": "✨ Avant / Après\n\nComment [Client] a [résultat] :\n\n❌ Avant : [situation initiale]\n✅ Après : [résultat obtenu]\n\n⏱️ En seulement [durée]\n\nVous voulez la même transformation ?",
+          "platforms": ["instagram", "linkedin"]
+        },
+        {
+          "id": "free-3",
+          "name": "Mythe vs Réalité",
+          "content": "❌ Mythe : \"[Idée reçue fausse]\"\n\n✅ Réalité : [La vérité]\n\nExplication : [Détails]\n\nPartagez si vous êtes d'accord ! 👇",
+          "platforms": ["instagram", "linkedin"]
+        },
+        {
+          "id": "free-4",
+          "name": "Session disponible",
+          "content": "📅 2 places disponibles cette semaine !\n\nPour : [Service/Accompagnement]\n\n✅ Vous obtiendrez : [Bénéfice]\n\n🔗 Réservez : [Lien]\n\n#Coaching #Disponibilité",
+          "platforms": ["instagram", "linkedin"]
+        }
+      ]
+    },
+    {
+      "id": "ong",
+      "name": "Association / ONG",
+      "icon": "❤️",
+      "templates": [
+        {
+          "id": "ong-1",
+          "name": "Appel aux dons",
+          "content": "❤️ Aidez-nous à [mission]\n\nChaque don compte :\n• 10€ = [impact]\n• 50€ = [impact]\n• 100€ = [impact]\n\n🔗 Je fais un don : [Lien]\n\n#Solidarité #Don",
+          "platforms": ["facebook", "instagram", "linkedin"]
+        },
+        {
+          "id": "ong-2",
+          "name": "Impact",
+          "content": "🎯 Grâce à vous ce mois-ci :\n\n📊 [Nombre] [bénéficiaires] aidés\n💰 [Montant]€ collectés\n🤝 [Nombre] bénévoles mobilisés\n\nMerci ! 💜\n\n#Impact #Merci",
+          "platforms": ["facebook", "instagram", "linkedin"]
+        },
+        {
+          "id": "ong-3",
+          "name": "Témoignage",
+          "content": "💬 [Prénom] témoigne :\n\n\"[Histoire/témoignage]\"\n\nEnsemble, nous changeons des vies. ❤️",
+          "platforms": ["facebook", "instagram"]
+        },
+        {
+          "id": "ong-4",
+          "name": "Événement solidaire",
+          "content": "🤝 Rejoignez notre [Événement] !\n\n📅 [Date]\n📍 [Lieu]\n\nAu programme : [Description]\n\n🔗 Inscription : [Lien]\n\n#Solidarité #Événement",
+          "platforms": ["facebook", "instagram", "linkedin"]
+        }
+      ]
+    }
+  ]
+}
