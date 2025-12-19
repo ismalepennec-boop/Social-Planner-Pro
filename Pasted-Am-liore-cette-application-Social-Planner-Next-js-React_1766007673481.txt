@@ -1,0 +1,50 @@
+Améliore cette application Social Planner (Next.js/React) avec ces fonctionnalités prioritaires :
+
+## 1. WORKFLOW FLUIDE
+- Ajouter une barre de progression visuelle : Script → Voix → Visuel → Musique → Export
+- Implémenter la sauvegarde automatique toutes les 30 secondes
+- Ajouter un système de templates pré-configurés avec 3 catégories : "Viral Hook", "Tutorial", "Product Review"
+
+## 2. GÉNÉRATION SCRIPT AMÉLIORÉE
+- Remplacer le champ vide par 3 suggestions de scripts générées automatiquement
+- Ajouter un compteur de caractères avec durée estimée (1 caractère = 0.05s)
+- Bouton "Régénérer" pour varier le style (formel/casual/humoristique)
+- Afficher des hooks pré-écrits cliquables : "Saviez-vous que...", "3 astuces pour...", "Erreur #1..."
+
+## 3. SOUS-TITRES AUTOMATIQUES
+- Générer des sous-titres synchronisés avec la voix-off
+- Style personnalisable (position, couleur, police)
+- Option "Mots-clés en surbrillance"
+
+## 4. PRÉVISUALISATION TEMPS RÉEL
+- Mettre à jour le mockup de téléphone en direct quand l'utilisateur modifie le texte/musique
+- Afficher la durée totale de la vidéo
+
+## 5. EXPORT MULTI-FORMATS
+- Bouton "Exporter pour tous les réseaux" qui génère 3 fichiers optimisés :
+  * TikTok : 9:16, max 60s
+  * Instagram Reel : 9:16, max 90s  
+  * YouTube Short : 9:16, max 60s
+- Compression automatique sous 50MB
+
+## 6. SCORE DE VIRALITÉ
+- Afficher un score /100 basé sur :
+  * Hook dans les 3 premières secondes (30 pts)
+  * Durée optimale 7-30s (25 pts)
+  * Sous-titres présents (25 pts)
+  * Musique tendance utilisée (20 pts)
+- Afficher des conseils d'amélioration sous le score
+
+## 7. BIBLIOTHÈQUE DE MÉDIAS
+- Intégrer l'API Pexels pour vidéos stock gratuites
+- Barre de recherche avec filtres : "Motivation", "Business", "Nature", etc.
+- Drag & drop des clips dans la zone de prévisualisation
+
+## STACK TECHNIQUE
+- Utilise Shadcn/UI pour les composants
+- Tailwind pour le styling
+- Framer Motion pour les animations
+- Zustand pour le state management
+- API Pexels pour les vidéos stock
+
+Priorise l'UX mobile-first et garde l'interface simple et intuitive.

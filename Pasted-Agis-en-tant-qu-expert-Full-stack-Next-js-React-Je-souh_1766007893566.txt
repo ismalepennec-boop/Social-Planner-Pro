@@ -1,0 +1,47 @@
+Agis en tant qu'expert Full-stack Next.js/React. Je souhaite ajouter une section "Laboratoire Vidéo" à mon application Social Planner, en suivant scrupuleusement ces spécifications techniques et fonctionnelles :
+
+1. Architecture & Workflow
+Navigation : Ajoute l'onglet "Laboratoire Vidéo" dans la sidebar existante.
+
+Barre de progression : Implémente un stepper visuel en haut de la page : Script -> Voix -> Visuel -> Musique -> Export.
+
+Gestion d'état : Utilise Zustand pour gérer l'état global de la création vidéo et implémente une sauvegarde automatique toutes les 30 secondes en local.
+
+2. Éditeur de Script & IA
+Suggestions : Remplace le champ texte vide par un système de 3 suggestions de scripts générés (Placeholders IA).
+
+Estimation : Ajoute un compteur de caractères avec une estimation de durée (ratio : 1 caractère = 0.05s).
+
+Bibliothèque de Hooks : Propose des boutons cliquables pour insérer des hooks ("Saviez-vous que...", "3 astuces pour...").
+
+Templates : Propose 3 types de structures : "Viral Hook", "Tutorial", "Product Review".
+
+3. Prévisualisation & Sous-titres
+Mockup Temps Réel : Crée un composant de prévisualisation (iPhone vertical 9:16) qui reflète les modifications de texte en direct.
+
+Sous-titres : Ajoute une option pour générer des sous-titres stylisés (superposés sur la vidéo) avec une option "Mots-clés en surbrillance" (couleur jaune/flashy).
+
+4. Bibliothèque de Médias (Pexels API)
+Intègre l'API Pexels pour permettre la recherche de vidéos stock gratuites directement dans l'app.
+
+Ajoute une barre de recherche avec des filtres rapides : "Motivation", "Business", "Nature".
+
+Permets le Drag & Drop des clips vers la zone de prévisualisation.
+
+5. Score de Viralité & Export
+Algorithme de Score : Affiche une jauge de 0 à 100 basée sur : Hook (30pts), Durée optimale 7-30s (25pts), Sous-titres (25pts), Musique tendance (20pts).
+
+Export Multi-formats : Crée un bouton "Exporter pour tous les réseaux" générant les réglages pour :
+
+TikTok : 9:16, max 60s.
+
+Instagram Reel : 9:16, max 90s.
+
+YouTube Short : 9:16, max 60s.
+
+6. Stack Technique & Design
+UI : Utilise Shadcn/UI pour les composants et Tailwind CSS pour le style.
+
+Animations : Utilise Framer Motion pour les transitions entre les étapes du workflow.
+
+Design : Garde une interface "Mobile-first", minimaliste et intuitive.

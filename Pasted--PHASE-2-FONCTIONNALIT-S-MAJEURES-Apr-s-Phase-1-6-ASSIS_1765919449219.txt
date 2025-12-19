@@ -1,0 +1,357 @@
+=== PHASE 2 - FONCTIONNALITÉS MAJEURES (Après Phase 1) ===
+
+6. ASSISTANT IA POUR RÉDACTION
+
+Intégrer OpenAI GPT-4 ou équivalent pour assister la création de contenu.
+
+Fonctionnalités à créer :
+
+A) Génération de légende :
+- Bouton "✨ Générer légende" dans l'éditeur
+- Modal qui demande : sujet, ton (professionnel/décontracté/humoristique), longueur (courte/moyenne/longue), mots-clés à inclure
+- Générer 3 variantes différentes
+- Possibilité de régénérer ou d'affiner
+
+B) Amélioration de texte :
+- Sélectionner du texte et clic droit "Améliorer avec IA"
+- Options : raccourcir, allonger, changer le ton, corriger orthographe, ajouter emojis, rendre plus engageant
+
+C) Génération de hashtags :
+- Bouton "#️⃣ Suggérer hashtags"
+- Analyser le contenu du post
+- Proposer 15 hashtags pertinents avec leur volume de recherche estimé
+- Possibilité de sélectionner ceux à ajouter
+
+D) Optimisation du timing :
+- Bouton "⏰ Meilleur moment"
+- Analyser l'historique d'engagement de l'utilisateur
+- Suggérer les 3 meilleurs créneaux pour publier
+- Afficher un graphique des heures optimales par jour de la semaine
+
+E) Score de qualité :
+- Afficher un score 0-100 en temps réel pendant la rédaction
+- Critères : longueur appropriée, présence d'appel à l'action, hashtags, emojis, qualité visuelle
+- Suggestions d'amélioration concrètes
+
+Interface :
+- Toolbar flottante dans l'éditeur avec icônes IA
+- Sidebar droite "Assistant IA" avec suggestions contextuelles
+- Indicateur de crédits IA restants
+
+Variables d'environnement à configurer :
+- OPENAI_API_KEY
+- AI_MODEL (par défaut gpt-4)
+- AI_MAX_TOKENS (par défaut 500)
+
+Créer les fichiers :
+- services/ai/openai.js
+- services/ai/textGeneration.js
+- components/AI/AIAssistant.jsx
+- components/AI/CaptionGenerator.jsx
+- components/AI/HashtagSuggester.jsx
+- components/AI/QualityScore.jsx
+
+7. SYSTÈME DE COLLABORATION
+
+Créer un système complet pour le travail d'équipe.
+
+A) Commentaires sur posts :
+- Possibilité d'ajouter des commentaires sur n'importe quel post
+- Mentions d'autres membres (@nom)
+- Notifications en temps réel
+- Annotations visuelles : cliquer sur une zone de l'image pour ajouter un commentaire positionné
+- Résoudre/archiver les commentaires
+
+B) Workflow d'approbation :
+- Définir des règles : "Les posts doivent être approuvés par un manager avant publication"
+- États : Brouillon → Soumis pour validation → Approuvé/Rejeté → Programmé
+- Interface d'approbation avec boutons Approuver/Demander modifications/Rejeter
+- Champ obligatoire pour justifier un rejet
+- Notifications par email
+
+C) Historique des versions :
+- Sauvegarder automatiquement chaque modification d'un post
+- Vue "Historique" montrant toutes les versions avec timestamp et auteur
+- Comparer 2 versions côte-à-côte (diff visuel)
+- Restaurer une version antérieure
+
+D) Rôles et permissions :
+- Admin : tous les droits
+- Manager : créer, éditer, approuver, publier, voir analytiques
+- Créateur : créer, éditer ses propres posts, soumettre pour validation
+- Viewer : lecture seule, voir analytiques
+
+Base de données - ajouter ces tables :
+- post_comments (id, post_id, user_id, comment, position_x, position_y, created_at, resolved)
+- post_versions (id, post_id, content_snapshot, author_id, version_number, created_at)
+- approval_workflows (id, post_id, status, approver_id, comments, created_at)
+- team_roles (id, user_id, team_id, role, permissions_json)
+
+Créer les fichiers :
+- components/Collaboration/CommentThread.jsx
+- components/Collaboration/ApprovalWorkflow.jsx
+- components/Collaboration/VersionHistory.jsx
+- components/Collaboration/TeamManagement.jsx
+
+8. BIBLIOTHÈQUE DE MÉDIAS INTELLIGENTE
+
+Créer une bibliothèque centralisée pour gérer tous les médias.
+
+Fonctionnalités :
+
+A) Upload et organisation :
+- Drag & drop zone pour upload multiple
+- Dossiers/collections personnalisables
+- Tags multiples par média
+- Recherche par nom, tag, date, type
+- Tri par date, nom, taille, popularité
+
+B) Intégrations externes :
+- Recherche Unsplash directement dans l'app (photos gratuites)
+- Recherche Pexels (photos et vidéos gratuites)
+- Recherche Giphy (GIFs animés)
+- Import depuis Google Drive, Dropbox
+
+C) Auto-tagging avec IA :
+- Analyser automatiquement chaque image uploadée
+- Détecter objets, couleurs dominantes, texte, visages
+- Générer des tags automatiquement
+- Possibilité de corriger/ajouter des tags manuellement
+
+D) Éditeur d'images intégré :
+- Crop/Recadrage avec ratios prédéfinis par plateforme
+- Resize/Redimensionnement
+- Filtres (luminosité, contraste, saturation)
+- Ajout de texte et stickers
+- Templates de posts (cadres Instagram, miniatures YouTube)
+
+E) Statistiques d'utilisation :
+- Médias les plus utilisés
+- Médias non utilisés (suggérer suppression)
+- Espace de stockage utilisé
+
+APIs à intégrer :
+- Unsplash API (clé gratuite)
+- Pexels API (clé gratuite)
+- Giphy API (clé gratuite)
+- Google Cloud Vision API ou AWS Rekognition (pour auto-tagging)
+
+Créer les fichiers :
+- views/MediaLibrary.jsx
+- components/MediaLibrary/MediaGrid.jsx
+- components/MediaLibrary/MediaUpload.jsx
+- components/MediaLibrary/MediaSearch.jsx
+- components/MediaLibrary/ExternalProviders.jsx
+- components/MediaLibrary/MediaEditor.jsx
+- services/media/cloudStorage.js
+- services/media/autoTagging.js
+
+9. ANALYTIQUES AVANCÉES
+
+Enrichir le dashboard analytique existant.
+
+Nouveaux KPIs à ajouter :
+
+A) Engagement par type de contenu :
+- Graphique en barres : image vs vidéo vs carousel vs texte seul
+- Taux d'engagement moyen pour chaque type
+- Recommandation du meilleur type selon historique
+
+B) Heatmap des meilleurs horaires :
+- Grille jour de la semaine × heure de la journée
+- Code couleur selon taux d'engagement
+- Clic sur case pour voir posts publiés à ce moment
+
+C) Performance des hashtags :
+- Tableau des hashtags utilisés avec reach et engagement
+- Top 10 des hashtags les plus performants
+- Suggestion de nouveaux hashtags à tester
+
+D) Croissance de l'audience :
+- Graphique linéaire : évolution abonnés jour par jour
+- Nouveaux abonnés vs désabonnés
+- Taux de croissance en %
+- Projection future basée sur tendance
+
+E) Analyse de contenu :
+- Quels sujets/thèmes performent le mieux ?
+- Longueur optimale des posts (courte/moyenne/longue)
+- Impact des emojis sur engagement
+- Impact des appels à l'action
+
+F) Benchmark concurrentiel :
+- Comparer ses métriques avec 3-5 concurrents
+- Graphiques radar pour comparer engagement, fréquence de publication, croissance
+
+G) Export de rapports :
+- Générer rapport PDF ou PowerPoint automatiquement
+- Choisir période (semaine/mois/trimestre/année)
+- Inclure graphiques, métriques clés, recommandations
+- Planifier envoi automatique par email (ex: rapport hebdomadaire chaque lundi)
+
+Librairie de graphiques à utiliser : Recharts ou Chart.js
+
+Créer les fichiers :
+- components/Analytics/EngagementByType.jsx
+- components/Analytics/BestTimesHeatmap.jsx
+- components/Analytics/HashtagPerformance.jsx
+- components/Analytics/AudienceGrowth.jsx
+- components/Analytics/ContentAnalysis.jsx
+- components/Analytics/CompetitorBenchmark.jsx
+- services/analytics/reportGenerator.js
+
+=== PHASE 3 - FONCTIONNALITÉS AVANCÉES (Optionnel - Après Phase 2) ===
+
+10. GÉNÉRATEUR D'IMAGES IA
+
+Intégrer DALL-E, Midjourney API, ou Stable Diffusion pour créer des visuels.
+
+Interface :
+- Bouton "🎨 Générer image IA" dans le planificateur
+- Champ de texte pour décrire l'image souhaitée
+- Sélecteur de style : photographie, illustration, minimaliste, 3D, aquarelle, etc.
+- Générer 4 variantes simultanément
+- Actions sur chaque image : utiliser, éditer, régénérer, télécharger
+- Historique des images générées
+
+Créer le fichier :
+- components/AI/ImageGenerator.jsx
+
+11. SOCIAL LISTENING LÉGER
+
+Surveiller les mentions de la marque sur les réseaux.
+
+Fonctionnalités :
+- Définir mots-clés à surveiller (nom de marque, produits, #hashtags)
+- Agréger mentions de toutes les plateformes
+- Analyse de sentiment : positif/négatif/neutre
+- Alertes pour mentions importantes
+- Suggestions d'opportunités d'engagement (conversations à rejoindre)
+
+Créer les fichiers :
+- views/Listening.jsx
+- components/Listening/KeywordTracker.jsx
+- components/Listening/MentionsFeed.jsx
+- components/Listening/SentimentChart.jsx
+
+12. INBOX UNIFIÉ
+
+Centraliser tous les commentaires et messages directs.
+
+Fonctionnalités :
+- Agréger commentaires Instagram, Facebook, LinkedIn
+- Agréger messages directs de toutes plateformes
+- Tri par plateforme, date, lu/non lu
+- Répondre directement depuis l'app
+- Marquer comme résolu/archivé
+- Templates de réponses rapides
+- Notifications en temps réel pour nouveaux messages
+
+Créer les fichiers :
+- views/Inbox.jsx
+- components/Inbox/MessageList.jsx
+- components/Inbox/MessageCard.jsx
+- components/Inbox/QuickReply.jsx
+
+13. MODE HORS LIGNE
+
+Permettre de travailler sans connexion internet.
+
+Fonctionnalités :
+- Transformer l'app en PWA (Progressive Web App)
+- Sauvegarder posts en local avec IndexedDB
+- Synchronisation automatique quand connexion revient
+- Indicateur visuel "Hors ligne" avec queue de synchronisation
+- Notification "3 posts en attente de synchronisation"
+
+Technologies :
+- Service Worker
+- IndexedDB (librairie idb)
+- Background Sync API
+
+=== PHASE 4 - OPTIMISATIONS (Continu) ===
+
+14. PERFORMANCE
+
+Optimisations à implémenter :
+- Code splitting par route (lazy loading)
+- Optimisation des images (WebP, lazy loading)
+- Pagination et infinite scroll sur listes longues
+- Caching intelligent des données
+- Réduire bundle size
+- Audit Lighthouse (viser 90+ sur tous critères)
+
+15. TESTS
+
+Ajouter tests pour garantir stabilité :
+- Tests unitaires avec Jest (fonctions critiques)
+- Tests d'intégration (flux complets)
+- Tests E2E avec Playwright (parcours utilisateur)
+- Viser 70% de couverture minimum
+
+16. ACCESSIBILITÉ
+
+Rendre l'app accessible :
+- Labels ARIA sur tous éléments interactifs
+- Navigation clavier complète
+- Contraste suffisant (WCAG AA minimum)
+- Focus visible sur tous éléments interactifs
+- Annonces screen reader pour actions importantes
+
+=== PRINCIPES DE DÉVELOPPEMENT ===
+
+Qualité du code :
+- Code propre, commenté, réutilisable
+- Composants modulaires et atomiques
+- Gestion d'état centralisée (Context API ou Zustand)
+- Gestion d'erreurs robuste avec messages clairs à l'utilisateur
+- Loading states et skeleton screens pendant chargements
+- Toasts/notifications pour feedback utilisateur
+
+UX/UI :
+- Animations fluides mais subtiles (Framer Motion)
+- Design cohérent avec charte existante (violet/bleu)
+- Responsive mobile-first
+- Mode sombre (à ajouter si pas déjà présent)
+- Messages d'erreur explicites et actionnables
+- États vides avec illustrations et call-to-action
+
+Sécurité :
+- Validation de tous les inputs
+- Protection contre XSS et injection SQL
+- Authentification sécurisée (JWT ou sessions)
+- Rate limiting sur APIs
+- Variables sensibles en .env (jamais hardcodées)
+
+=== ORDRE DE PRIORITÉ ===
+
+Implémenter dans cet ordre strict :
+1. Duplication cross-plateforme (impact immédiat)
+2. Vue Kanban (meilleure organisation)
+3. Raccourcis clavier (gain productivité)
+4. Templates (accélère création)
+5. Amélioration calendrier (usage quotidien)
+6. Assistant IA (différenciation majeure)
+7. Système collaboration (si équipes)
+8. Bibliothèque médias (centralisation)
+9. Analytiques avancées (insights)
+10. Reste en fonction besoins
+
+=== LIVRABLES ATTENDUS ===
+
+Pour chaque fonctionnalité :
+- Code fonctionnel et testé
+- Interface utilisateur intuitive
+- Documentation inline (commentaires)
+- Messages de commit clairs
+- Gestion d'erreurs appropriée
+
+Communication pendant développement :
+- Expliquer les choix techniques importants
+- Signaler les blocages ou ambiguïtés
+- Proposer des alternatives si une approche ne fonctionne pas
+- Demander validation avant grosses décisions d'architecture
+
+=== COMMENCE MAINTENANT ===
+
+Analyse d'abord le code existant pour comprendre l'architecture actuelle, puis commence par la Phase 1, fonctionnalité 1 (Duplication cross-plateforme). Demande confirmation avant de passer à la fonctionnalité suivante.

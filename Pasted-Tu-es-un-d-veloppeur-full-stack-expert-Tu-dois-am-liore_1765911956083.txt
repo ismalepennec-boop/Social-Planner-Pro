@@ -1,0 +1,532 @@
+Tu es un développeur full-stack expert. Tu dois améliorer une application de planification de réseaux sociaux existante appelée "Social Planner Pro".
+
+CONTEXTE DE L'APPLICATION ACTUELLE
+
+L'application possède déjà :
+- Calendrier Visuel : affichage mensuel des posts programmés avec code couleur
+- Planificateur : interface de création de contenu avec prévisualisation mobile en temps réel
+- Analytiques : dashboard avec métriques (abonnés totaux, impressions, taux d'engagement)
+- Multi-plateformes : LinkedIn, Facebook, Instagram
+- Interface : design moderne en violet/bleu, responsive, menu latéral avec "Social Command Center"
+
+Stack technique à détecter automatiquement et respecter.
+
+OBJECTIF GLOBAL
+
+Transformer cette application en outil premium qui surpasse Buffer, Hootsuite et Later en se concentrant sur : l'IA vraiment utile, la simplicité extrême (de l'idée à la publication en 60 secondes), et la collaboration sans friction.
+
+PLAN D'IMPLÉMENTATION PAR PHASES
+
+=== PHASE 1 - QUICK WINS (Priorité Maximum - À faire en premier) ===
+
+1. DUPLICATION INTELLIGENTE CROSS-PLATEFORME
+
+Créer un bouton "Dupliquer vers..." dans l'interface du planificateur qui permet de créer un post une fois et de l'adapter automatiquement à chaque plateforme.
+
+Règles d'adaptation automatique :
+- Instagram : max 2200 caractères, ratio images 1:1 ou 4:5, max 30 hashtags
+- Twitter/X : max 280 caractères, ratio images 16:9 ou 1:1, max 2 hashtags recommandés
+- LinkedIn : max 3000 caractères, ratio images 1.91:1, max 5 hashtags
+- Facebook : max 63206 caractères, ratio images 1.91:1, hashtags optionnels
+- TikTok : max 2200 caractères, ratio vidéo 9:16, max 5 hashtags
+
+L'interface doit montrer :
+- Sélecteur multi-plateformes avec checkboxes
+- Aperçu côte-à-côte des versions adaptées pour chaque plateforme sélectionnée
+- Indicateurs visuels : compteur de caractères avec code couleur (vert si OK, orange si proche limite, rouge si dépassé)
+- Alertes si le format média n'est pas optimal pour une plateforme
+- Bouton "Ajuster manuellement" pour personnaliser chaque version
+
+Créer les fichiers :
+- components/Planner/DuplicateButton.jsx
+- components/Planner/PlatformAdapter.js (logique d'adaptation)
+- components/Planner/MultiPlatformPreview.jsx (aperçus côte-à-côte)
+- utils/platformLimits.js (constantes des limites)
+
+2. VUE KANBAN POUR WORKFLOW
+
+Créer une nouvelle vue accessible depuis le menu principal qui affiche les posts sous forme de colonnes Kanban.
+
+Colonnes à créer :
+- 💡 Idées / Brouillons (posts non finalisés)
+- ✍️ En rédaction (posts en cours de création)
+- 👀 À valider (posts en attente d'approbation)
+- ⏰ Programmé (posts avec date/heure définie)
+- ✅ Publié (posts déjà en ligne)
+
+Fonctionnalités :
+- Drag & drop entre colonnes pour changer le statut
+- Compteur de posts par colonne
+- Filtres par plateforme, date, auteur
+- Carte de post compacte montrant : miniature, titre tronqué, icônes plateformes, date
+- Clic sur carte pour ouvrir modal d'édition complète
+- Animation fluide lors du déplacement
+
+Utiliser la librairie @dnd-kit/core pour le drag & drop.
+
+Créer les fichiers :
+- views/KanbanView.jsx (vue principale)
+- components/Kanban/KanbanBoard.jsx
+- components/Kanban/KanbanColumn.jsx
+- components/Kanban/PostCard.jsx
+
+3. RACCOURCIS CLAVIER
+
+Implémenter des raccourcis clavier pour navigation ultra-rapide.
+
+Liste complète des raccourcis :
+- n : Nouveau post
+- cmd+s / ctrl+s : Sauvegarder le post actuel
+- cmd+enter / ctrl+enter : Programmer/Publier immédiatement
+- cmd+d / ctrl+d : Dupliquer le post actuel
+- cmd+k / ctrl+k : Recherche rapide (ouvrir palette de commandes)
+- c : Ouvrir vue calendrier
+- k : Ouvrir vue Kanban
+- a : Voir analytiques
+- p : Ouvrir planificateur
+- esc : Fermer modal ou annuler action en cours
+- flèche gauche/droite : Naviguer entre posts
+- cmd+z / ctrl+z : Annuler dernière action
+- ? : Afficher overlay d'aide avec tous les raccourcis
+
+Utiliser la librairie react-hotkeys-hook.
+
+Créer un composant KeyboardShortcutsHelper.jsx qui affiche un overlay élégant avec la liste de tous les raccourcis quand on appuie sur "?".
+
+4. TEMPLATES PRÉ-REMPLIS PAR SECTEUR
+
+Créer une bibliothèque de templates pour réduire la page blanche.
+
+Catégories de templates à créer :
+
+E-commerce :
+- Lancement produit : "🎉 Nouveau ! Découvrez [produit]. Disponible dès maintenant. [lien]"
+- Promotion flash : "🔥 -30% aujourd'hui seulement sur [produit] ! Code : [code]"
+- Témoignage client : "⭐ [prénom] adore notre [produit] : '[citation]'"
+- Réassort : "📦 De retour en stock ! [produit] à nouveau disponible"
+- Behind the scenes : "👀 Coulisses : Comment nous créons [produit]"
+
+Services B2B :
+- Case study : "📊 Comment nous avons aidé [client] à [résultat]"
+- Astuce pro : "💡 Tip du jour : [conseil actionnable]"
+- Annonce webinar : "🎓 Rejoignez notre webinar gratuit : [sujet] le [date]"
+- Statistique : "📈 Le saviez-vous ? [stat choc] dans [industrie]"
+- Comparatif : "🆚 [Solution A] vs [Solution B] : Notre analyse"
+
+Restaurant/Food :
+- Plat du jour : "🍽️ Plat du jour : [plat]. Réservez : [lien/tél]"
+- Nouvelle carte : "✨ Nouvelle carte d'été ! Découvrez [plat signature]"
+- Événement : "🎉 Soirée spéciale [thème] le [date]. Places limitées !"
+- Coulisses cuisine : "👨‍🍳 Notre chef vous dévoile la recette de [plat]"
+
+Freelance/Coach :
+- Conseil gratuit : "💡 [Titre conseil] : [3 points clés]"
+- Transformation client : "✨ Avant/Après : Comment [client] a [résultat]"
+- Mythe vs Réalité : "❌ Mythe : [idée fausse] ✅ Réalité : [vérité]"
+- Session dispo : "📅 2 places libres cette semaine pour [service]"
+
+Association/ONG :
+- Appel aux dons : "❤️ Aidez-nous à [mission]. Chaque don compte : [lien]"
+- Impact : "🎯 Grâce à vous : [nombre] [bénéficiaires] aidés ce mois"
+- Témoignage : "💬 [Prénom] témoigne : '[histoire]'"
+- Événement : "🤝 Rejoignez notre [événement] le [date]"
+
+Interface :
+- Bouton "📝 Templates" dans le planificateur
+- Modal avec recherche par mot-clé et filtres par secteur
+- Aperçu du template avec exemple visuel
+- Bouton "Utiliser ce template" qui pré-remplit le planificateur
+- Possibilité de sauvegarder ses propres templates personnalisés
+
+Créer les fichiers :
+- data/templates.json (base de données des templates)
+- components/Templates/TemplateLibrary.jsx
+- components/Templates/TemplateCard.jsx
+- components/Templates/TemplatePreview.jsx
+
+5. AMÉLIORATION DU CALENDRIER
+
+Améliorer le calendrier existant avec :
+
+Nouvelles vues :
+- Vue Mois (existante - à enrichir)
+- Vue Semaine (nouvelle - plus détaillée, timeline par heure)
+- Vue Jour (nouvelle - timeline précise heure par heure)
+- Vue Agenda (nouvelle - liste chronologique)
+
+Sur chaque événement du calendrier, afficher :
+- Miniature de l'image/vidéo du post
+- Icônes des plateformes cibles (petit logo Instagram, Facebook, etc.)
+- Heure de publication
+- Badge de statut (brouillon/programmé/publié) avec code couleur
+- Première ligne du texte du post (tronquée)
+
+Interactions :
+- Drag & drop pour reprogrammer un post (déplacer vers autre date)
+- Double-clic sur événement pour ouvrir en édition
+- Clic droit pour menu contextuel (éditer, dupliquer, supprimer, voir statistiques)
+- Survol pour tooltip avec plus de détails
+
+Créer les fichiers :
+- components/Calendar/WeekView.jsx
+- components/Calendar/DayView.jsx
+- components/Calendar/AgendaView.jsx
+- components/Calendar/CalendarEvent.jsx (enrichir)
+
+=== PHASE 2 - FONCTIONNALITÉS MAJEURES (Après Phase 1) ===
+
+6. ASSISTANT IA POUR RÉDACTION
+
+Intégrer OpenAI GPT-4 ou équivalent pour assister la création de contenu.
+
+Fonctionnalités à créer :
+
+A) Génération de légende :
+- Bouton "✨ Générer légende" dans l'éditeur
+- Modal qui demande : sujet, ton (professionnel/décontracté/humoristique), longueur (courte/moyenne/longue), mots-clés à inclure
+- Générer 3 variantes différentes
+- Possibilité de régénérer ou d'affiner
+
+B) Amélioration de texte :
+- Sélectionner du texte et clic droit "Améliorer avec IA"
+- Options : raccourcir, allonger, changer le ton, corriger orthographe, ajouter emojis, rendre plus engageant
+
+C) Génération de hashtags :
+- Bouton "#️⃣ Suggérer hashtags"
+- Analyser le contenu du post
+- Proposer 15 hashtags pertinents avec leur volume de recherche estimé
+- Possibilité de sélectionner ceux à ajouter
+
+D) Optimisation du timing :
+- Bouton "⏰ Meilleur moment"
+- Analyser l'historique d'engagement de l'utilisateur
+- Suggérer les 3 meilleurs créneaux pour publier
+- Afficher un graphique des heures optimales par jour de la semaine
+
+E) Score de qualité :
+- Afficher un score 0-100 en temps réel pendant la rédaction
+- Critères : longueur appropriée, présence d'appel à l'action, hashtags, emojis, qualité visuelle
+- Suggestions d'amélioration concrètes
+
+Interface :
+- Toolbar flottante dans l'éditeur avec icônes IA
+- Sidebar droite "Assistant IA" avec suggestions contextuelles
+- Indicateur de crédits IA restants
+
+Variables d'environnement à configurer :
+- OPENAI_API_KEY
+- AI_MODEL (par défaut gpt-4)
+- AI_MAX_TOKENS (par défaut 500)
+
+Créer les fichiers :
+- services/ai/openai.js
+- services/ai/textGeneration.js
+- components/AI/AIAssistant.jsx
+- components/AI/CaptionGenerator.jsx
+- components/AI/HashtagSuggester.jsx
+- components/AI/QualityScore.jsx
+
+7. SYSTÈME DE COLLABORATION
+
+Créer un système complet pour le travail d'équipe.
+
+A) Commentaires sur posts :
+- Possibilité d'ajouter des commentaires sur n'importe quel post
+- Mentions d'autres membres (@nom)
+- Notifications en temps réel
+- Annotations visuelles : cliquer sur une zone de l'image pour ajouter un commentaire positionné
+- Résoudre/archiver les commentaires
+
+B) Workflow d'approbation :
+- Définir des règles : "Les posts doivent être approuvés par un manager avant publication"
+- États : Brouillon → Soumis pour validation → Approuvé/Rejeté → Programmé
+- Interface d'approbation avec boutons Approuver/Demander modifications/Rejeter
+- Champ obligatoire pour justifier un rejet
+- Notifications par email
+
+C) Historique des versions :
+- Sauvegarder automatiquement chaque modification d'un post
+- Vue "Historique" montrant toutes les versions avec timestamp et auteur
+- Comparer 2 versions côte-à-côte (diff visuel)
+- Restaurer une version antérieure
+
+D) Rôles et permissions :
+- Admin : tous les droits
+- Manager : créer, éditer, approuver, publier, voir analytiques
+- Créateur : créer, éditer ses propres posts, soumettre pour validation
+- Viewer : lecture seule, voir analytiques
+
+Base de données - ajouter ces tables :
+- post_comments (id, post_id, user_id, comment, position_x, position_y, created_at, resolved)
+- post_versions (id, post_id, content_snapshot, author_id, version_number, created_at)
+- approval_workflows (id, post_id, status, approver_id, comments, created_at)
+- team_roles (id, user_id, team_id, role, permissions_json)
+
+Créer les fichiers :
+- components/Collaboration/CommentThread.jsx
+- components/Collaboration/ApprovalWorkflow.jsx
+- components/Collaboration/VersionHistory.jsx
+- components/Collaboration/TeamManagement.jsx
+
+8. BIBLIOTHÈQUE DE MÉDIAS INTELLIGENTE
+
+Créer une bibliothèque centralisée pour gérer tous les médias.
+
+Fonctionnalités :
+
+A) Upload et organisation :
+- Drag & drop zone pour upload multiple
+- Dossiers/collections personnalisables
+- Tags multiples par média
+- Recherche par nom, tag, date, type
+- Tri par date, nom, taille, popularité
+
+B) Intégrations externes :
+- Recherche Unsplash directement dans l'app (photos gratuites)
+- Recherche Pexels (photos et vidéos gratuites)
+- Recherche Giphy (GIFs animés)
+- Import depuis Google Drive, Dropbox
+
+C) Auto-tagging avec IA :
+- Analyser automatiquement chaque image uploadée
+- Détecter objets, couleurs dominantes, texte, visages
+- Générer des tags automatiquement
+- Possibilité de corriger/ajouter des tags manuellement
+
+D) Éditeur d'images intégré :
+- Crop/Recadrage avec ratios prédéfinis par plateforme
+- Resize/Redimensionnement
+- Filtres (luminosité, contraste, saturation)
+- Ajout de texte et stickers
+- Templates de posts (cadres Instagram, miniatures YouTube)
+
+E) Statistiques d'utilisation :
+- Médias les plus utilisés
+- Médias non utilisés (suggérer suppression)
+- Espace de stockage utilisé
+
+APIs à intégrer :
+- Unsplash API (clé gratuite)
+- Pexels API (clé gratuite)
+- Giphy API (clé gratuite)
+- Google Cloud Vision API ou AWS Rekognition (pour auto-tagging)
+
+Créer les fichiers :
+- views/MediaLibrary.jsx
+- components/MediaLibrary/MediaGrid.jsx
+- components/MediaLibrary/MediaUpload.jsx
+- components/MediaLibrary/MediaSearch.jsx
+- components/MediaLibrary/ExternalProviders.jsx
+- components/MediaLibrary/MediaEditor.jsx
+- services/media/cloudStorage.js
+- services/media/autoTagging.js
+
+9. ANALYTIQUES AVANCÉES
+
+Enrichir le dashboard analytique existant.
+
+Nouveaux KPIs à ajouter :
+
+A) Engagement par type de contenu :
+- Graphique en barres : image vs vidéo vs carousel vs texte seul
+- Taux d'engagement moyen pour chaque type
+- Recommandation du meilleur type selon historique
+
+B) Heatmap des meilleurs horaires :
+- Grille jour de la semaine × heure de la journée
+- Code couleur selon taux d'engagement
+- Clic sur case pour voir posts publiés à ce moment
+
+C) Performance des hashtags :
+- Tableau des hashtags utilisés avec reach et engagement
+- Top 10 des hashtags les plus performants
+- Suggestion de nouveaux hashtags à tester
+
+D) Croissance de l'audience :
+- Graphique linéaire : évolution abonnés jour par jour
+- Nouveaux abonnés vs désabonnés
+- Taux de croissance en %
+- Projection future basée sur tendance
+
+E) Analyse de contenu :
+- Quels sujets/thèmes performent le mieux ?
+- Longueur optimale des posts (courte/moyenne/longue)
+- Impact des emojis sur engagement
+- Impact des appels à l'action
+
+F) Benchmark concurrentiel :
+- Comparer ses métriques avec 3-5 concurrents
+- Graphiques radar pour comparer engagement, fréquence de publication, croissance
+
+G) Export de rapports :
+- Générer rapport PDF ou PowerPoint automatiquement
+- Choisir période (semaine/mois/trimestre/année)
+- Inclure graphiques, métriques clés, recommandations
+- Planifier envoi automatique par email (ex: rapport hebdomadaire chaque lundi)
+
+Librairie de graphiques à utiliser : Recharts ou Chart.js
+
+Créer les fichiers :
+- components/Analytics/EngagementByType.jsx
+- components/Analytics/BestTimesHeatmap.jsx
+- components/Analytics/HashtagPerformance.jsx
+- components/Analytics/AudienceGrowth.jsx
+- components/Analytics/ContentAnalysis.jsx
+- components/Analytics/CompetitorBenchmark.jsx
+- services/analytics/reportGenerator.js
+
+=== PHASE 3 - FONCTIONNALITÉS AVANCÉES (Optionnel - Après Phase 2) ===
+
+10. GÉNÉRATEUR D'IMAGES IA
+
+Intégrer DALL-E, Midjourney API, ou Stable Diffusion pour créer des visuels.
+
+Interface :
+- Bouton "🎨 Générer image IA" dans le planificateur
+- Champ de texte pour décrire l'image souhaitée
+- Sélecteur de style : photographie, illustration, minimaliste, 3D, aquarelle, etc.
+- Générer 4 variantes simultanément
+- Actions sur chaque image : utiliser, éditer, régénérer, télécharger
+- Historique des images générées
+
+Créer le fichier :
+- components/AI/ImageGenerator.jsx
+
+11. SOCIAL LISTENING LÉGER
+
+Surveiller les mentions de la marque sur les réseaux.
+
+Fonctionnalités :
+- Définir mots-clés à surveiller (nom de marque, produits, #hashtags)
+- Agréger mentions de toutes les plateformes
+- Analyse de sentiment : positif/négatif/neutre
+- Alertes pour mentions importantes
+- Suggestions d'opportunités d'engagement (conversations à rejoindre)
+
+Créer les fichiers :
+- views/Listening.jsx
+- components/Listening/KeywordTracker.jsx
+- components/Listening/MentionsFeed.jsx
+- components/Listening/SentimentChart.jsx
+
+12. INBOX UNIFIÉ
+
+Centraliser tous les commentaires et messages directs.
+
+Fonctionnalités :
+- Agréger commentaires Instagram, Facebook, LinkedIn
+- Agréger messages directs de toutes plateformes
+- Tri par plateforme, date, lu/non lu
+- Répondre directement depuis l'app
+- Marquer comme résolu/archivé
+- Templates de réponses rapides
+- Notifications en temps réel pour nouveaux messages
+
+Créer les fichiers :
+- views/Inbox.jsx
+- components/Inbox/MessageList.jsx
+- components/Inbox/MessageCard.jsx
+- components/Inbox/QuickReply.jsx
+
+13. MODE HORS LIGNE
+
+Permettre de travailler sans connexion internet.
+
+Fonctionnalités :
+- Transformer l'app en PWA (Progressive Web App)
+- Sauvegarder posts en local avec IndexedDB
+- Synchronisation automatique quand connexion revient
+- Indicateur visuel "Hors ligne" avec queue de synchronisation
+- Notification "3 posts en attente de synchronisation"
+
+Technologies :
+- Service Worker
+- IndexedDB (librairie idb)
+- Background Sync API
+
+=== PHASE 4 - OPTIMISATIONS (Continu) ===
+
+14. PERFORMANCE
+
+Optimisations à implémenter :
+- Code splitting par route (lazy loading)
+- Optimisation des images (WebP, lazy loading)
+- Pagination et infinite scroll sur listes longues
+- Caching intelligent des données
+- Réduire bundle size
+- Audit Lighthouse (viser 90+ sur tous critères)
+
+15. TESTS
+
+Ajouter tests pour garantir stabilité :
+- Tests unitaires avec Jest (fonctions critiques)
+- Tests d'intégration (flux complets)
+- Tests E2E avec Playwright (parcours utilisateur)
+- Viser 70% de couverture minimum
+
+16. ACCESSIBILITÉ
+
+Rendre l'app accessible :
+- Labels ARIA sur tous éléments interactifs
+- Navigation clavier complète
+- Contraste suffisant (WCAG AA minimum)
+- Focus visible sur tous éléments interactifs
+- Annonces screen reader pour actions importantes
+
+=== PRINCIPES DE DÉVELOPPEMENT ===
+
+Qualité du code :
+- Code propre, commenté, réutilisable
+- Composants modulaires et atomiques
+- Gestion d'état centralisée (Context API ou Zustand)
+- Gestion d'erreurs robuste avec messages clairs à l'utilisateur
+- Loading states et skeleton screens pendant chargements
+- Toasts/notifications pour feedback utilisateur
+
+UX/UI :
+- Animations fluides mais subtiles (Framer Motion)
+- Design cohérent avec charte existante (violet/bleu)
+- Responsive mobile-first
+- Mode sombre (à ajouter si pas déjà présent)
+- Messages d'erreur explicites et actionnables
+- États vides avec illustrations et call-to-action
+
+Sécurité :
+- Validation de tous les inputs
+- Protection contre XSS et injection SQL
+- Authentification sécurisée (JWT ou sessions)
+- Rate limiting sur APIs
+- Variables sensibles en .env (jamais hardcodées)
+
+=== ORDRE DE PRIORITÉ ===
+
+Implémenter dans cet ordre strict :
+1. Duplication cross-plateforme (impact immédiat)
+2. Vue Kanban (meilleure organisation)
+3. Raccourcis clavier (gain productivité)
+4. Templates (accélère création)
+5. Amélioration calendrier (usage quotidien)
+6. Assistant IA (différenciation majeure)
+7. Système collaboration (si équipes)
+8. Bibliothèque médias (centralisation)
+9. Analytiques avancées (insights)
+10. Reste en fonction besoins
+
+=== LIVRABLES ATTENDUS ===
+
+Pour chaque fonctionnalité :
+- Code fonctionnel et testé
+- Interface utilisateur intuitive
+- Documentation inline (commentaires)
+- Messages de commit clairs
+- Gestion d'erreurs appropriée
+
+Communication pendant développement :
+- Expliquer les choix techniques importants
+- Signaler les blocages ou ambiguïtés
+- Proposer des alternatives si une approche ne fonctionne pas
+- Demander validation avant grosses décisions d'architecture
+
+=== COMMENCE MAINTENANT ===
+
+Analyse d'abord le code existant pour comprendre l'architecture actuelle, puis commence par la Phase 1, fonctionnalité 1 (Duplication cross-plateforme). Demande confirmation avant de passer à la fonctionnalité suivante.

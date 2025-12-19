@@ -1,0 +1,26 @@
+Agis comme un expert UI/UX Senior. Je veux refaire le design complet de l'application pour lui donner un aspect plus "Premium", "Élégant" et "Convivial".
+
+Voici les directives spécifiques pour la refonte visuelle :
+
+1.  **Palette de couleurs (Thème Clair & Épuré) :**
+    * Supprime complètement l'arrière-plan noir.
+    * Utilise un arrière-plan global gris très clair (ex: #F3F4F6 ou slate-50) pour donner de la profondeur.
+    * Pour les conteneurs (Sidebar, Zone de rédaction, Preview), utilise du blanc pur (#FFFFFF) avec des bordures très subtiles ou des ombres douces (soft shadows).
+    * Garde le violet actuel comme couleur primaire (pour les boutons et accents), mais assure-toi qu'il ressorte bien sur le blanc.
+
+2.  **Typography & Espacement :**
+    * Utilise une police sans-serif moderne et lisible (comme Inter ou System UI).
+    * Augmente le "padding" (espacement interne) dans les cartes pour laisser respirer le contenu.
+    * Améliore la hiérarchie visuelle : les titres doivent être foncés (gris anthracite, pas noir pur) et les textes secondaires en gris moyen.
+
+3.  **Composants & UI :**
+    * **Sidebar :** Fais-la blanche ou gris très pâle, distincte du reste de la page.
+    * **Input Area (Zone de texte) :** Doit ressembler à une surface de papier propre. Ajoute un focus ring subtil en violet quand on clique dessus.
+    * **Score de qualité :** Modernise cette section. Au lieu d'une liste sombre, utilise des "chips" ou des badges colorés sur fond clair pour les suggestions. La jauge doit être fine et élégante.
+    * **Preview Mobile :** Centre bien le téléphone. Ajoute une ombre portée réaliste derrière le téléphone pour qu'il se détache du fond.
+
+4.  **Style Global :**
+    * Arrondis légèrement les coins des boutons et des cartes (border-radius: 12px ou 16px) pour un look plus amical ("friendly").
+    * L'ensemble doit inspirer la simplicité et la productivité professionnelle.
+
+Applique ces changements au fichier CSS/Tailwind et aux composants React concernés maintenant.
