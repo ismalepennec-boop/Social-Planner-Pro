@@ -15,7 +15,7 @@ Application professionnelle de planification et scheduling pour les réseaux soc
 
 - **Frontend**: React + TypeScript + Vite
 - **UI**: shadcn/ui + Tailwind CSS
-- **Backend**: Node.js + Express
+- |**Backend**: Node.js + Express
 - **Database**: Supabase (PostgreSQL)
 - **Calendar**: react-big-calendar
 - **Drag & Drop**: @dnd-kit
@@ -26,22 +26,6 @@ Application professionnelle de planification et scheduling pour les réseaux soc
 ```bash
 npm install
 npm run dev
-```
-
-## Structure du projet
-
-```
-├── client/src/          # React frontend
-│   ├── components/      # Composants réutilisables
-│   ├── pages/           # Pages de l'application
-│   ├── lib/             # Utilitaires et API client
-│   └── hooks/           # Hooks React personnalisés
-├── server/              # Backend Express
-│   ├── routes.ts        # Routes API
-│   ├── storage.ts       # Opérations base de données
-│   └── db.ts            # Connexion base de données
-├── shared/              # Code partagé client/serveur
-│   └── schema.ts        # Schéma de données
 ```
 
 ## Licence
